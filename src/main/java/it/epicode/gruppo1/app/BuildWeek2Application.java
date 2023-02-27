@@ -40,8 +40,8 @@ ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 		
 		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
 		Utente u2 = (Utente)ctx.getBean("utente", "tano", "gaetano@mail.com", "ciao", "quarto", "gaetano");
-		Ruolo r1 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.ADMIN);
-		Ruolo r2 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.UTENTE);
+		Ruolo r1 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.ROLE_ADMIN);
+		Ruolo r2 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.ROLE_USER);
 				
 		rs.save(r1);
 		rs.save(r2);
