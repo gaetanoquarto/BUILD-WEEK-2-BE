@@ -1,6 +1,5 @@
 package it.epicode.gruppo1.app.entities;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -24,7 +23,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-
 public class Fattura {
 
 	@Id
@@ -35,7 +33,5 @@ public class Fattura {
 	private LocalDate data;
 	private double importo; 
 	private int numero;
-
-	
 		
 }
