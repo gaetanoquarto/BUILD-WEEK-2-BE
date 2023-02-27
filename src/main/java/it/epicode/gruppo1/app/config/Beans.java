@@ -94,14 +94,14 @@ public class Beans {
 	
 	@Bean
 	@Scope("prototype")
-	public Utente utente(String username, String email, String password, String nome, boolean attivo, Set<Ruolo> ruoli) {
+	public Utente utente(String username, String email, String password, String nome, String cognome) {
 		return  Utente.builder()
 				.username(username)
 				.email(email)
 				.password(password)
 				.nome(nome)
-				.attivo(attivo)
-				.ruoli(ruoli)
+				.cognome(cognome)
+				.attivo(true)
 				.build();		
 	}
 	

@@ -3,11 +3,14 @@ package it.epicode.gruppo1.app.entities;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import it.epicode.gruppo1.app.entities.enums.StatoFattura;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,5 +36,8 @@ public class Fattura {
 	private LocalDate data;
 	private double importo; 
 	private int numero;
+	
+	@Enumerated(EnumType.STRING)
+    private StatoFattura statoFattura;
 		
 }
