@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import it.epicode.gruppo1.app.entities.enums.StatoFattura;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
+
 public class Fattura {
 
 	@Id
@@ -33,5 +35,8 @@ public class Fattura {
 	private LocalDate data;
 	private double importo; 
 	private int numero;
+	private StatoFattura statofattura; 
+	
+	
 		
 }
