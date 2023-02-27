@@ -31,6 +31,6 @@ public class Ruolo {
 	private int id;
 	
 	@Enumerated(EnumType.STRING)
-	TipoRuolo tipoRuolo;
+	private TipoRuolo tipoRuolo;
 	
 }

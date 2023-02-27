@@ -36,6 +36,7 @@ public class BuildWeek2Application implements CommandLineRunner{
 	private RuoloService rs;
 	
 	public void popolaDb() {
+
 ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 		
 		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
