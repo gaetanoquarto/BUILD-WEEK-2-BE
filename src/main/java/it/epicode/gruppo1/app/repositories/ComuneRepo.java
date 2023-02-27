@@ -1,5 +1,11 @@
 package it.epicode.gruppo1.app.repositories;
 
-public interface ComuneRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import it.epicode.gruppo1.app.entities.Comune;
+
+@Repository
+public interface ComuneRepo extends JpaRepository<Comune, Integer>{
 
 }
