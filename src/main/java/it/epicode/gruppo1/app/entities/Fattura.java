@@ -40,8 +40,5 @@ public class Fattura {
 	
 	@Enumerated(EnumType.STRING)
     private StatoFattura statoFattura;
-
-	
-	
 		
 }

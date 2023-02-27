@@ -19,50 +19,53 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//	@Autowired
-//	UserDetailsServiceImpl userDetailsService;
-//	@Autowired
-//	private AuthEntryPointUnauthorizedJwt unauthorizedHandler;
-//
-//	@Bean
-//	public AuthTokenFilter authenticationJwtTokenFilter() {
-//		return new AuthTokenFilter();
-//	}
-//
-//	@Override
-//	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-//		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(this.passwordEncoder());
-//	}
-//
-//	@Bean
-//	@Override
-//	public AuthenticationManager authenticationManagerBean() throws Exception {
-//		return super.authenticationManagerBean();
-//	}
-//
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		// Questa implementazione non è sicura, verrà modificata in seguito
-//		return NoOpPasswordEncoder.getInstance();
-//	}
-//
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.cors().and().csrf().disable()
-//			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-//			.and()
-//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//			.and()
-//			.logout()
-//			.logoutSuccessUrl("/app/page1")
-//			.invalidateHttpSession(true)
-//			.deleteCookies("JSESSIONID")
-//			.and()
-//			.authorizeRequests().antMatchers("/**")
-//			.permitAll()
-//			.anyRequest().authenticated();
-//
-//		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//	}
+
+	@Autowired
+	UserDetailsServiceImpl userDetailsService;
+	@Autowired
+	private AuthEntryPointUnauthorizedJwt unauthorizedHandler;
+
+	@Bean
+	public AuthTokenFilter authenticationJwtTokenFilter() {
+		return new AuthTokenFilter();
+	}
+
+	@Override
+	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(this.passwordEncoder());
+	}
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		// Questa implementazione non è sicura, verrà modificata in seguito
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable()
+		
+			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+			.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.logout()
+			.logoutSuccessUrl("/auth/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID")
+			.and()
+			.authorizeRequests().antMatchers("/**")
+			.permitAll()
+			.anyRequest().authenticated();
+
+		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
+
 }
 
