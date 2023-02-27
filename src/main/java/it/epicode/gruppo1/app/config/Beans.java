@@ -94,7 +94,7 @@ public class Beans {
 	
 	@Bean
 	@Scope("prototype")
-	public Utente utente(String username, String email, String password, String nome, String cognome, Set<Ruolo> ruoli) {
+	public Utente utente(String username, String email, String password, String nome, String cognome) {
 		return  Utente.builder()
 				.username(username)
 				.email(email)
@@ -102,7 +102,6 @@ public class Beans {
 				.nome(nome)
 				.cognome(cognome)
 				.attivo(true)
-				.ruoli(ruoli)
 				.build();		
 	}
 	
