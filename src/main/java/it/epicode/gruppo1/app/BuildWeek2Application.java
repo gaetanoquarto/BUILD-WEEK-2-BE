@@ -27,9 +27,9 @@ public class BuildWeek2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 //		popolaDb();
-
 		
 	}
+	
 	@Autowired
 	private UtenteService us;
 	@Autowired
@@ -37,7 +37,7 @@ public class BuildWeek2Application implements CommandLineRunner{
 	
 	public void popolaDb() {
 
-ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 		
 		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
 		Utente u2 = (Utente)ctx.getBean("utente", "tano", "gaetano@mail.com", "ciao", "quarto", "gaetano");
@@ -59,8 +59,6 @@ ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 		us.save(u2);
 		
 		System.out.println("db popolato!");
-		
-		
 		
 		((AnnotationConfigApplicationContext)ctx).close();
 	}
