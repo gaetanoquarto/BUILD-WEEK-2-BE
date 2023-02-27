@@ -42,7 +42,7 @@ public class Beans {
 				.fatture(fatture)
 				.build();
 	}
-	//alessia non si abbandona il gruppo così
+	
 	@Bean
 	@Scope("prototype")
 	public Comune comune(String nome, Provincia provincia) {
@@ -94,13 +94,14 @@ public class Beans {
 	
 	@Bean
 	@Scope("prototype")
-	public Utente utente(String username, String email, String password, String nome, boolean attivo, Set<Ruolo> ruoli) {
+	public Utente utente(String username, String email, String password, String nome, String cognome, Set<Ruolo> ruoli) {
 		return  Utente.builder()
 				.username(username)
 				.email(email)
 				.password(password)
 				.nome(nome)
-				.attivo(attivo)
+				.cognome(cognome)
+				.attivo(true)
 				.ruoli(ruoli)
 				.build();		
 	}
