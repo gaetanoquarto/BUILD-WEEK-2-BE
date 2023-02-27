@@ -3,6 +3,8 @@ package it.epicode.gruppo1.app.entities;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +37,10 @@ public class Fattura {
 	private LocalDate data;
 	private double importo; 
 	private int numero;
-	private StatoFattura statofattura; 
+	
+	@Enumerated(EnumType.STRING)
+    private StatoFattura statoFattura;
+
 	
 	
 		
