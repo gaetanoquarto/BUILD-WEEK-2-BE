@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 	@Autowired
@@ -65,5 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
+
 }
 

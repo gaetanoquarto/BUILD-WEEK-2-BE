@@ -26,6 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
+
 public class Fattura {
 
 	@Id

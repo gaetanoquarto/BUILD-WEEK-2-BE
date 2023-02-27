@@ -15,21 +15,21 @@ import it.epicode.gruppo1.app.repositories.UtenteRepo;
 
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl /*implements UserDetailsService*/ {
 
-	@Autowired
-	UtenteRepo userRepository;
-
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Utente> user = userRepository.findByUsername(username);
-
-		if (user.isPresent()) {
-			return UserDetailsImpl.build(user.get());
-		} else {
-			throw new UsernameNotFoundException("User Not Found with username: " + username);
-		}
-	}
+//	@Autowired
+//	UtenteRepo userRepository;
+//
+//	@Override
+//	@Transactional
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		Optional<Utente> user = userRepository.findByUsername(username);
+//
+//		if (user.isPresent()) {
+//			return UserDetailsImpl.build(user.get());
+//		} else {
+//			throw new UsernameNotFoundException("User Not Found with username: " + username);
+//		}
+//	}
 
 }

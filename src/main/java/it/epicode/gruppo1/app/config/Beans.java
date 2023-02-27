@@ -42,7 +42,7 @@ public class Beans {
 				.fatture(fatture)
 				.build();
 	}
-	//alessia non si abbandona il gruppo così
+	
 	@Bean
 	@Scope("prototype")
 	public Comune comune(String nome, Provincia provincia) {
