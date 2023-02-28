@@ -22,7 +22,6 @@ import it.epicode.gruppo1.app.security.LoginResponse;
 import it.epicode.gruppo1.app.security.UserDetailsImpl;
 import it.epicode.gruppo1.app.services.UtenteService;
 
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -38,11 +37,9 @@ public class AuthController {
 		
 	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-		
 		authentication.getAuthorities();
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
@@ -59,7 +56,6 @@ public class AuthController {
 	public String logout() {
 		return "utente disconnesso!";
 	}
-
 
 }
 

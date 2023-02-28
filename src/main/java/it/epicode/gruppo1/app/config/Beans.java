@@ -97,7 +97,6 @@ public class Beans {
 				.build();
 	}
 	
-	
 	@Bean
 	@Scope("prototype")
 	public Utente utente(String username, String email, String password, String nome, String cognome) {

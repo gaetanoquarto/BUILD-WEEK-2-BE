@@ -1,7 +1,6 @@
 package it.epicode.gruppo1.app;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Arrays;
 
@@ -26,37 +25,35 @@ import it.epicode.gruppo1.app.services.RuoloService;
 import it.epicode.gruppo1.app.services.UtenteService;
 
 @SpringBootApplication
-public class BuildWeek2Application implements CommandLineRunner{
+public class BuildWeek2Application implements CommandLineRunner {
+	
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BuildWeek2Application.class, args);
 	}
 
-	ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
-
 	@Override
 	public void run(String... args) throws Exception {
-		
-		
 //		popolaDb();
 //		popolaDb2();
 		
-
 		((AnnotationConfigApplicationContext)ctx).close();
-
-		
 	}
+	
 	@Autowired
 	private UtenteService us;
+	
 	@Autowired
 	private RuoloService rs;
+	
 	@Autowired
 	private FatturaService fs;
+	
 	@Autowired
 	private ClienteService cs;
 	
 	public void popolaDb() {
-		
 		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
 		Utente u2 = (Utente)ctx.getBean("utente", "tano", "gaetano@mail.com", "ciao", "quarto", "gaetano");
 		Ruolo r1 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.ROLE_ADMIN);
@@ -76,18 +73,16 @@ public class BuildWeek2Application implements CommandLineRunner{
 		us.save(u1);
 		us.save(u2);
 		
-		System.out.println("db popolato!");
-		
+		System.out.println("Db popolato!");
 	}
 	
 	public void popolaDb2() {
-
-		Fattura f1 = (Fattura)ctx.getBean("fattura", 2021, LocalDate.parse("2021-05-12"), 1500.00, 1, StatoFattura.DA_PAGARE);
-		Fattura f2 = (Fattura)ctx.getBean("fattura", 2020, LocalDate.parse("2020-08-21"), 1900.00, 2, StatoFattura.SCADUTA);
-		Fattura f3 = (Fattura)ctx.getBean("fattura", 2022, LocalDate.parse("2022-10-15"), 500.00, 3, StatoFattura.PAGATA);
-		Fattura f4 = (Fattura)ctx.getBean("fattura", 2018, LocalDate.parse("2018-09-03"), 2000.00, 4, StatoFattura.DA_PAGARE);
-		Fattura f5 = (Fattura)ctx.getBean("fattura", 2015, LocalDate.parse("2015-01-29"), 1600.00, 5, StatoFattura.PAGATA);
-		Fattura f6 = (Fattura)ctx.getBean("fattura", 2023, LocalDate.parse("2023-12-08"), 2200.00, 6, StatoFattura.DA_PAGARE);
+		Fattura f1 = (Fattura)ctx.getBean("fattura", 2021, LocalDate.parse("2021-05-12"), 1500.50, 100, StatoFattura.DA_PAGARE);
+		Fattura f2 = (Fattura)ctx.getBean("fattura", 2020, LocalDate.parse("2020-08-21"), 1900.81, 101, StatoFattura.SCADUTA);
+		Fattura f3 = (Fattura)ctx.getBean("fattura", 2022, LocalDate.parse("2022-10-15"), 500.73, 102, StatoFattura.PAGATA);
+		Fattura f4 = (Fattura)ctx.getBean("fattura", 2018, LocalDate.parse("2018-09-03"), 2000.27, 103, StatoFattura.DA_PAGARE);
+		Fattura f5 = (Fattura)ctx.getBean("fattura", 2015, LocalDate.parse("2015-01-29"), 1600.21, 104, StatoFattura.PAGATA);
+		Fattura f6 = (Fattura)ctx.getBean("fattura", 2023, LocalDate.parse("2023-12-08"), 2200.70, 105, StatoFattura.DA_PAGARE);
 		
 		fs.save(f1);
 		fs.save(f2);
@@ -95,7 +90,6 @@ public class BuildWeek2Application implements CommandLineRunner{
 		fs.save(f4);
 		fs.save(f5);
 		fs.save(f6);
-		
 		
 		Cliente c1 = (Cliente)ctx.getBean("cliente", "cliente1", 483532452345L, "cliente1@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 300000.00, "cliente1@pec.it", 3452392816L, "cc1@mail.com", "Gianfranco", "Rossi", 321235681L, TipoCliente.SAS, null, Arrays.asList(f1, f2));
 		Cliente c2 = (Cliente)ctx.getBean("cliente", "cliente2", 483532452345L, "cliente2@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 300000.00, "cliente2@pec.it", 3452392816L, "cc2@mail.com", "Marco", "Verdi", 321235681L, TipoCliente.PA, null, Arrays.asList(f3, f4));
@@ -105,9 +99,7 @@ public class BuildWeek2Application implements CommandLineRunner{
 		cs.save(c2);
 		cs.save(c3);
 		
-		System.out.println("DB POPOLATO!");
-
-
+		System.out.println("Db popolato!");
 	}
 
 }

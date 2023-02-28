@@ -19,6 +19,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtUtils {
+	
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
 	@Value("${jwt.secret}")
@@ -58,4 +59,5 @@ public class JwtUtils {
 		}
 		return false;
 	}
+
 }

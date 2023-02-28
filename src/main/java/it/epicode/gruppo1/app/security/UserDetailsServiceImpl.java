@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import it.epicode.gruppo1.app.entities.Utente;
 import it.epicode.gruppo1.app.repositories.UtenteRepo;
 
-
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
