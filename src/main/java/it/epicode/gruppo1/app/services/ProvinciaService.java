@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.services;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import it.epicode.gruppo1.app.csv.CsvHelperProvincia;
 import it.epicode.gruppo1.app.entities.Provincia;
 import it.epicode.gruppo1.app.repositories.ProvinciaRepo;
 
@@ -36,5 +39,14 @@ public class ProvinciaService {
 	public void delete(Provincia p) {
 		pr.delete(p);
 	}
+	
+	public void saveFile(MultipartFile file) {
+	    try {
+	      List<Provincia> province = CsvHelperProvincia.csvToProvincia(file.getInputStream());
+	      pr.saveAll(province);
+	    } catch (IOException e) {
+	      throw new RuntimeException("fail to store csv data: " + e.getMessage());
+	    }
+	  }
 
 }

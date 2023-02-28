@@ -27,7 +27,14 @@ public class Provincia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String nome;
 	private String sigla;
+	private String provincia;
+	private String regione;
+
+	public Provincia(String sigla, String provincia, String regione) {
+		this.sigla = sigla;
+		this.provincia = provincia;
+		this.regione = regione;
+	}
 
 }
