@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.epicode.gruppo1.app.entities.Fattura;
+import it.epicode.gruppo1.app.entities.enums.StatoFattura;
 import it.epicode.gruppo1.app.services.FatturaService;
 
 @RestController
@@ -98,6 +101,31 @@ public class FattureController {
 		return new ResponseEntity<>(
 			String.format("La Fattura con id %d è stata eliminata!", id), HttpStatus.OK	
 		);
+	}
+	
+	@GetMapping("fatture/cercaCliente")
+	public List<Fattura> getAllFattureByCliente(@RequestParam("cliente") int id) {
+		return fs.getByCliente(id);
+	}
+	
+	@GetMapping("fatture/cercaStato")
+	public List<Fattura> getAllFattureByStato(@RequestParam("stato") StatoFattura stato) {
+		return fs.getFromStatoFattura(stato);
+	}
+	
+	@GetMapping("fatture/cercaData")
+	public List<Fattura> getAllFattureByData(@RequestParam("data") String data) {
+		return fs.getFromData(LocalDate.parse(data));
+	}
+	
+	@GetMapping("fatture/cercaAnno")
+	public List<Fattura> getAllFattureByAnno(@RequestParam("anno") int anno) {
+		return fs.getFromAnno(anno);
+	}
+	
+	@GetMapping("fatture/cercaImporto")
+	public List<Fattura> getAllFattureByImporto(@RequestParam("min") double min,@RequestParam("max") double max) {
+		return fs.getByImporto(min, max);
 	}
 	
 	private ResponseEntity<Object> checkExists(Optional<Fattura> obj) {
