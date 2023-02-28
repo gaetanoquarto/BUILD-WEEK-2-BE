@@ -39,7 +39,7 @@ public class Utente {
 	private String password;
 	private String nome;
 	private String cognome;
-	private boolean attivo;
+	private boolean attivo = true;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(

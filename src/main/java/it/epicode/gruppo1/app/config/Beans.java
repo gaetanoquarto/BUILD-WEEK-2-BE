@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import it.epicode.gruppo1.app.entities.Cliente;
 import it.epicode.gruppo1.app.entities.Comune;
@@ -92,6 +94,7 @@ public class Beans {
 				.tipoRuolo(tr)
 				.build();
 	}
+	
 	
 	@Bean
 	@Scope("prototype")
