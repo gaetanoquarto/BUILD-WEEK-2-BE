@@ -16,11 +16,14 @@ import lombok.Data;
 
 @Data
 public class UserDetailsImpl implements UserDetails {
+	
 	private int id;
 	private String username;
 	private String email;
+	
 	@JsonIgnore
 	private String password;
+	
 	private boolean accountNonLocked = true;
 	private boolean accountNonExpired = false;
 	private boolean credentialsNonExpired = true;
@@ -29,9 +32,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(int id, String username, String email, String password, boolean enabled,
-			Collection<? extends GrantedAuthority> authorities) {
-		super();
+	public UserDetailsImpl(int id, String username, String email, String password, boolean enabled, Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
@@ -49,5 +50,6 @@ public class UserDetailsImpl implements UserDetails {
 		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
 				user.isAttivo(), authorities);
 	}
+
 }
 

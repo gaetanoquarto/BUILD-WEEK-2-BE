@@ -35,6 +35,5 @@ public class Indirizzo {
 	
 	@ManyToOne
 	private Comune comune;
-	
 
 }

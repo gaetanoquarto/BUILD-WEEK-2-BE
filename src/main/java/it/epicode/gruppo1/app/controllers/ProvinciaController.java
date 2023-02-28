@@ -20,7 +20,7 @@ public class ProvinciaController {
 	@Autowired
 	ProvinciaService ps;
 
-	 @PostMapping("provincia/upload")
+	 @PostMapping("province")
 	  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
 	    String message = "";
 
