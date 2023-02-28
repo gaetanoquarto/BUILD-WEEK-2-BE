@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID")
 			.and()
-			.authorizeRequests().antMatchers("/**")
+			.authorizeRequests().antMatchers("/**", "/provincia/upload")
 			.permitAll()
 			.anyRequest().authenticated();
 
