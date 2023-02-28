@@ -23,6 +23,9 @@ public class UtenteController {
 	@Autowired
 	private UtenteService us;
 	
+	@Autowired
+	PasswordEncoder pwEncoder;
+	
 	@PostMapping("utenti")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> createCliente(@RequestBody Utente u) {
@@ -32,11 +35,8 @@ public class UtenteController {
 		
 		return new ResponseEntity<Object>(utenti, HttpStatus.CREATED);
 	}
-	
-	@Autowired
-	PasswordEncoder pwEncoder;
-	
-	@GetMapping("/auth_update_user_pw")
+
+	@GetMapping("auth/update_user_pw")
 	@ResponseBody
 	public String auth_update_user_pw() {
 		int id = 2;
@@ -48,4 +48,5 @@ public class UtenteController {
 		
 		return "utente aggiornato";
 	}
+
 }
