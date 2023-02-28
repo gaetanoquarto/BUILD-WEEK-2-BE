@@ -27,6 +27,8 @@ public class BuildWeek2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 //		popolaDb();
+		
+//		creaUtente();
 
 		
 	}
@@ -63,6 +65,17 @@ ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 		
 		
 		((AnnotationConfigApplicationContext)ctx).close();
+	}
+	
+	public void creaUtente() {
+ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
+		
+		Utente u1 = (Utente)ctx.getBean("utente", "utente", "admin@mail.com", "ops", "prova", "prova");
+		
+		us.save(u1);
+		((AnnotationConfigApplicationContext)ctx).close();
+
+
 	}
 
 }
