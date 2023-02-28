@@ -17,6 +17,7 @@ import it.epicode.gruppo1.app.entities.Indirizzo;
 import it.epicode.gruppo1.app.entities.Provincia;
 import it.epicode.gruppo1.app.entities.Ruolo;
 import it.epicode.gruppo1.app.entities.Utente;
+import it.epicode.gruppo1.app.entities.enums.StatoFattura;
 import it.epicode.gruppo1.app.entities.enums.TipoCliente;
 import it.epicode.gruppo1.app.entities.enums.TipoRuolo;
 
@@ -29,7 +30,7 @@ public class Beans {
 		return Cliente.builder()
 				.ragioneSociale(ragioneSociale)
 				.partitaIva(partitaIva)
-				.email(emailContatto)
+				.email(email)
 				.dataInserimento(dataIserimento)
 				.dataUltimoContatto(dataUltimoContatto)
 				.fatturatoAnnuale(fatturatoAnnuale)
@@ -38,7 +39,7 @@ public class Beans {
 				.emailContatto(emailContatto)
 				.nomeContatto(nomeContatto)
 				.cognomeContatto(cognomeContatto)
-				.telefono(telefonoContatto)
+				.telefonoContatto(telefonoContatto)
 				.tipoCliente(tipoCliente)
 				.indirizzi(indirizzi)
 				.fatture(fatture)
@@ -56,12 +57,13 @@ public class Beans {
 	
 	@Bean
 	@Scope("prototype")
-	public Fattura fattura(int anno, LocalDate data, double importo, int numero) { 
+	public Fattura fattura(int anno, LocalDate data, double importo, int numero, StatoFattura statoFattura) { 
 	return Fattura.builder()
 			.anno(anno)
 			.data(data)
 			.importo(importo)
 			.numero(numero)
+			.statoFattura(statoFattura)
 			.build();
 	}
 	
