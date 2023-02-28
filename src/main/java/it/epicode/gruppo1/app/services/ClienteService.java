@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,19 @@ public class ClienteService {
 	
 	public void delete(Cliente c) {
 		cr.delete(c);
+	}
+	
+	public List<Cliente> findByFatturatoAnnuale(double fatturato) {
+		return cr.findByFatturatoAnnuale(fatturato);
+	}
+	public List<Cliente> findByDataInserimento(LocalDate dataInserimento) {
+		return cr.findByDataInserimento(dataInserimento);
+	}
+	public List<Cliente> findByDataUltimoContatto(LocalDate data) {
+		return cr.findByDataUltimoContatto(data);
+	}
+	public List<Cliente> findByNome(String nome) {
+		return cr.findByNome(nome);
 	}
 	
 }
