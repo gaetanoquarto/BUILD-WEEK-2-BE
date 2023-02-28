@@ -77,10 +77,11 @@ public class Beans {
 	
 	@Bean
 	@Scope("prototype")
-	public Provincia provincia(String nome, String sigla) {
+	public Provincia provincia(String sigla, String provincia, String regione) {
 		return Provincia.builder()
-				.nome(nome)
 				.sigla(sigla)
+				.provincia(provincia)
+				.regione(regione)
 				.build();
 	}
 	
