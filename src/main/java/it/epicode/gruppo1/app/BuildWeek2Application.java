@@ -28,8 +28,10 @@ public class BuildWeek2Application implements CommandLineRunner{
 		
 //		popolaDb();
 		
+//		creaUtente();
+
+		
 	}
-	
 	@Autowired
 	private UtenteService us;
 	@Autowired
@@ -37,7 +39,7 @@ public class BuildWeek2Application implements CommandLineRunner{
 	
 	public void popolaDb() {
 
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
+ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
 		
 		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
 		Utente u2 = (Utente)ctx.getBean("utente", "tano", "gaetano@mail.com", "ciao", "quarto", "gaetano");
@@ -60,7 +62,20 @@ public class BuildWeek2Application implements CommandLineRunner{
 		
 		System.out.println("db popolato!");
 		
+		
+		
 		((AnnotationConfigApplicationContext)ctx).close();
+	}
+	
+	public void creaUtente() {
+ApplicationContext ctx = new AnnotationConfigApplicationContext(Beans.class);
+		
+		Utente u1 = (Utente)ctx.getBean("utente", "utente", "admin@mail.com", "ops", "prova", "prova");
+		
+		us.save(u1);
+		((AnnotationConfigApplicationContext)ctx).close();
+
+
 	}
 
 }

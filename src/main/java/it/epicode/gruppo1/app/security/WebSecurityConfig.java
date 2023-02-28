@@ -10,9 +10,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+
 
 
 @Configuration
@@ -21,9 +24,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	private AuthEntryPointUnauthorizedJwt unauthHandler;
+
 	@Autowired
-	private AuthEntryPointUnauthorizedJwt unauthorizedHandler;
+	private UserDetailsServiceImpl userService;
 
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -31,10 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(this.passwordEncoder());
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userService).passwordEncoder(this.passwordEncoder());
 	}
-
+	
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -43,26 +47,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		// Questa implementazione non è sicura, verrà modificata in seguito
-		return NoOpPasswordEncoder.getInstance();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
-		
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-			.and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
-			.logout()
-			.logoutSuccessUrl("/auth/logout")
-			.invalidateHttpSession(true)
-			.deleteCookies("JSESSIONID")
-			.and()
-			.authorizeRequests().antMatchers("/**", "/provincia/upload")
-			.permitAll()
-			.anyRequest().authenticated();
+		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+				.antMatchers("/auth/login", "/provincia/upload", "/home", "/auth_update_user_pw").permitAll()
+				.antMatchers("/**").authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
