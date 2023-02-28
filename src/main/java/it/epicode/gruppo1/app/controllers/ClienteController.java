@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.epicode.gruppo1.app.entities.Cliente;
@@ -116,5 +119,27 @@ public class ClienteController {
 		}
 		return null;
 	}
+	
+	@GetMapping("clienti/cercaNome")
+	public List<Cliente> nome(@RequestParam("nome") String nome) {
+		return cs.findByNome(nome);
+	}
+	
+	@GetMapping("clienti/cercaFatturato")
+	public List<Cliente> fatturato(@RequestParam("fatturato") double fatturato) {
+		return cs.findByFatturatoAnnuale(fatturato);
+	}
+	
+	@GetMapping("clienti/cercaDataInserimento")
+	public List<Cliente> dataInserimento(@RequestParam("dataInserimento") String dataInserimento) {
+		return cs.findByDataInserimento(LocalDate.parse(dataInserimento));
+	}
+	
+	@GetMapping("clienti/cercaDataUltimoContatto")
+	public List<Cliente> dataUltimoContatto(@RequestParam("dataUltimoContatto") String dataUltimoContatto) {
+		return cs.findByDataUltimoContatto(LocalDate.parse(dataUltimoContatto));
+	}
+	
+	
 
 }
