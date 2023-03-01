@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.epicode.gruppo1.app.entities.Comune;
+import it.epicode.gruppo1.app.entities.Provincia;
 import it.epicode.gruppo1.app.repositories.ComuneRepo;
 
 @Service
@@ -35,6 +36,10 @@ public class ComuneService {
 	
 	public void delete(Comune c) {
 		cr.delete(c);
+	}
+	
+	public List<Comune> saveAll(List<Comune> c) {
+		return cr.saveAll(c);
 	}
 
 }

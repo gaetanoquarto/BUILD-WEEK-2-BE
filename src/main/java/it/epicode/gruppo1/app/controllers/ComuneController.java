@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,22 +16,27 @@ import com.univocity.parsers.common.record.Record;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
+import it.epicode.gruppo1.app.entities.Comune;
 import it.epicode.gruppo1.app.entities.Provincia;
-import it.epicode.gruppo1.app.exceptions.ResponseMessage;
+import it.epicode.gruppo1.app.services.ComuneService;
 import it.epicode.gruppo1.app.services.ProvinciaService;
 
 @RestController
 @RequestMapping("/")
-public class ProvinciaController {
+public class ComuneController {
 	
 	@Autowired
-	ProvinciaService ps;
+	private ComuneService cs;
+	@Autowired
+	private ProvinciaService ps;
+	
+	static Provincia provinciaId;
 
-
-	@PostMapping("province")
+	
+	@PostMapping("comuni")
 	public String uploadData(@RequestParam("file") MultipartFile file) throws Exception{
 		
-		List<Provincia> province = new ArrayList<>();
+		List<Comune> comuni = new ArrayList<>();
 		InputStream inputStream = file.getInputStream();
 		CsvParserSettings setting = new CsvParserSettings();
 		setting.detectFormatAutomatically();
@@ -41,13 +44,30 @@ public class ProvinciaController {
 		CsvParser csvParser = new CsvParser(setting);
 		List<Record> parseAllRecords = csvParser.parseAllRecords(inputStream);
 		parseAllRecords.forEach(record -> {
-			Provincia provincia = new Provincia();
-			provincia.setSigla(record.getString("Sigla"));
-			provincia.setProvincia(record.getString("Provincia"));
-			provincia.setRegione(record.getString("Regione"));
-			province.add(provincia);
+			Comune comune = new Comune();
+			comune.setNome(record.getString("Denominazione in italiano"));
+			comune.setCodProvincia(Integer.parseInt(record.getString("Codice Provincia (Storico)(1)")));
+			comune.setProgComune(record.getString("Progressivo del Comune (2)"));
+			
+			List<Provincia> province = ps.getAll();
+			String nomeProvincia = record.getString(3);
+			
+			
+			for(int i = 0; i < province.size(); i++) {
+				
+				String nome = province.get(i).getProvincia();
+				if(nome.equals(nomeProvincia)) {
+					comune.setProvincia(province.get(i));
+				}
+
+			}
+
+			
+			comuni.add(comune);
+			
 		});
-		ps.saveAll(province);
+		cs.saveAll(comuni);
 		return "Upload effettuato!";
 	}
+
 }

@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,16 @@ public class Comune {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "nome_comune")
 	private String nome;
+	
+	@Column(name = "codice_provincia")
+	private int codProvincia;
+	
+	@Column(name = "porgressivo_comune")
+	private String progComune;
+	
+	
 	
 	@ManyToOne
 	private Provincia provincia;

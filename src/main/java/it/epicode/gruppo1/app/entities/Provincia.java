@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,14 +28,15 @@ public class Provincia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "sigla")
 	private String sigla;
+	
+	@Column(name = "provincia")
 	private String provincia;
+	
+	@Column(name = "regione")
 	private String regione;
 
-	public Provincia(String sigla, String provincia, String regione) {
-		this.sigla = sigla;
-		this.provincia = provincia;
-		this.regione = regione;
-	}
+	
 
 }
