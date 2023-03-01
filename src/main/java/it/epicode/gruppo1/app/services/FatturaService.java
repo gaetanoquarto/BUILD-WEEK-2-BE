@@ -27,7 +27,7 @@ public class FatturaService {
 		return fr.findAll();
 	}
 	
-	public Page<Fattura> getAllInPages(Pageable pageable) {
+	public Page<Fattura> getAll_page(Pageable pageable) {
 		return fr.findAll(pageable);
 	}
 	

@@ -3,7 +3,6 @@ package it.epicode.gruppo1.app;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,10 +65,10 @@ public class BuildWeek2Application implements CommandLineRunner {
 	private IndirizzoService is;
 	
 	public void popolaDb() {
-		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
-		Utente u2 = (Utente)ctx.getBean("utente", "tano", "gaetano@mail.com", "ciao", "quarto", "gaetano");
 		Ruolo r1 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.ROLE_ADMIN);
 		Ruolo r2 = (Ruolo)ctx.getBean("ruolo", TipoRuolo.ROLE_USER);
+		Utente u1 = (Utente)ctx.getBean("utente", "admin", "admin@mail.com", "admin", "admin", "admin");
+		Utente u2 = (Utente)ctx.getBean("utente", "user", "mario@mail.com", "user", "Mario", "Rossi");
 				
 		rs.save(r1);
 		rs.save(r2);
@@ -106,13 +105,14 @@ public class BuildWeek2Application implements CommandLineRunner {
 		List<Comune> comuni = cms.getAll();
 		
 		Comune cm1 = comuni.get(10);
+		Comune cm2 = comuni.get(50);
 		
-		Indirizzo i1 = (Indirizzo)ctx.getBean("indirizzo", "Via Sant'Antonio", 155, "Poggio del Sol", 70043, cm1);
-		Indirizzo i2 = (Indirizzo)ctx.getBean("indirizzo", "Via 1", 20, "Località 1", 70043, cm1);
-		Indirizzo i3 = (Indirizzo)ctx.getBean("indirizzo", "Via 2", 50, "Località 2", 70043, cm1);
-		Indirizzo i4 = (Indirizzo)ctx.getBean("indirizzo", "Via 3", 200, "Località 3", 70043, cm1);
-		Indirizzo i5 = (Indirizzo)ctx.getBean("indirizzo", "Via 4", 18, "Località 4", 70043, cm1);
-		Indirizzo i6 = (Indirizzo)ctx.getBean("indirizzo", "Via 5", 75, "Località 5", 70043, cm1);
+		Indirizzo i1 = (Indirizzo)ctx.getBean("indirizzo", "Via uno", 155, "Località 1", 10020, cm1);
+		Indirizzo i2 = (Indirizzo)ctx.getBean("indirizzo", "Via due", 20, "Località 2", 10020, cm1);
+		Indirizzo i3 = (Indirizzo)ctx.getBean("indirizzo", "Via tre", 50, "Località 3", 10020, cm1);
+		Indirizzo i4 = (Indirizzo)ctx.getBean("indirizzo", "Via quattro", 200, "Località 4", 10020, cm1);
+		Indirizzo i5 = (Indirizzo)ctx.getBean("indirizzo", "Via cinque", 18, "Località 5", 10080, cm2);
+		Indirizzo i6 = (Indirizzo)ctx.getBean("indirizzo", "Via sei", 75, "Località 6", 10080, cm2);
 		
 		is.save(i1);
 		is.save(i2);
@@ -121,9 +121,9 @@ public class BuildWeek2Application implements CommandLineRunner {
 		is.save(i5);
 		is.save(i6);
 		
-		Cliente c1 = (Cliente)ctx.getBean("cliente", "cliente1", 483532452345L, "cliente1@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 300000.00, "cliente1@pec.it", 3452392816L, "cc1@mail.com", "Gianfranco", "Rossi", 321235681L, TipoCliente.SAS, i1, i2, Arrays.asList(f1, f2));
-		Cliente c2 = (Cliente)ctx.getBean("cliente", "cliente2", 483532452345L, "cliente2@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 300000.00, "cliente2@pec.it", 3452392816L, "cc2@mail.com", "Marco", "Verdi", 321235681L, TipoCliente.PA, i3, i4, Arrays.asList(f3, f4));
-		Cliente c3 = (Cliente)ctx.getBean("cliente", "cliente3", 483532452345L, "cliente3@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 300000.00, "cliente3@pec.it", 3452392816L, "cc3@mail.com", "Nicola", "Bruno", 321235681L, TipoCliente.SPA, i5, i6, Arrays.asList(f5, f6));
+		Cliente c1 = (Cliente)ctx.getBean("cliente", "Cliente 1", 123456789L, "cliente1@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 400000.00, "cliente1@pec.it", 3452392816L, "cc1@mail.com", "Gianfranco", "Rossi", 7544845655L, TipoCliente.SAS, i1, i2, Arrays.asList(f1, f2));
+		Cliente c2 = (Cliente)ctx.getBean("cliente", "Cliente 2", 987654321L, "cliente2@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 200000.00, "cliente2@pec.it", 3345665898L, "cc2@mail.com", "Marco", "Verdi", 1447548665L, TipoCliente.PA, i3, i4, Arrays.asList(f3, f4));
+		Cliente c3 = (Cliente)ctx.getBean("cliente", "Cliente 3", 456789123L, "cliente3@mail.com", LocalDate.now().minusDays(3), LocalDate.now(), 250000.00, "cliente3@pec.it", 4578559566L, "cc3@mail.com", "Nicola", "Bruno", 3255688844L, TipoCliente.SPA, i5, i6, Arrays.asList(f5, f6));
 		
 		cs.save(c1);
 		cs.save(c2);
