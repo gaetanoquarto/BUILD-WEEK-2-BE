@@ -90,7 +90,8 @@ public class ClienteController {
 		cliente.setCognomeContatto(_cliente.getCognomeContatto());
 		cliente.setTelefonoContatto(_cliente.getTelefonoContatto());
 		cliente.setTipoCliente(_cliente.getTipoCliente());
-		cliente.setIndirizzi(_cliente.getIndirizzi());
+		cliente.setSedeLegale(_cliente.getSedeLegale());
+		cliente.setSedeOperativa(_cliente.getSedeOperativa());
 		cliente.setFatture(_cliente.getFatture());
 		
 		cs.save(cliente);
@@ -140,6 +141,9 @@ public class ClienteController {
 		return cs.findByDataUltimoContatto(LocalDate.parse(dataUltimoContatto));
 	}
 	
-	
+	@GetMapping("clienti/ordinaPerSedeLegale")
+	public List<Cliente> ordinaPerSedeLegale() {
+		return cs.ordinaPerSedeLegale();
+	}
 
 }

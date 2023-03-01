@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import it.epicode.gruppo1.app.entities.enums.TipoCliente;
@@ -50,8 +51,11 @@ public class Cliente {
 	@Enumerated(EnumType.STRING)
 	private TipoCliente tipoCliente;
 	
-	@OneToMany
-	private List<Indirizzo> indirizzi;
+	@OneToOne
+	private Indirizzo sedeLegale;
+	
+	@OneToOne
+	private Indirizzo sedeOperativa;
 	
 	@OneToMany
 	private List<Fattura> fatture;

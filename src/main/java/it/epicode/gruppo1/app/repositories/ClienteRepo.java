@@ -21,6 +21,12 @@ public interface ClienteRepo extends JpaRepository<Cliente, Integer> {
 			    nativeQuery = true,
 			    value = "SELECT * FROM clienti WHERE LOWER(nome_contatto) LIKE LOWER(CONCAT('%', :fn, '%'))"
 			)
-			List<Cliente> findByNome(@Param("fn") String nome);
+		List<Cliente> findByNome(@Param("fn") String nome);
+
+		@Query(
+			    nativeQuery = true,
+			    value = "SELECT c.* FROM clienti c INNER JOIN indirizzi i ON c.sede_legale_id = i.id INNER JOIN comuni cm ON i.comune_id = cm.id INNER JOIN province p ON cm.provincia_id = p.id ORDER BY p.provincia"
+			)
+		List<Cliente> ordinaBySedeLegale();
 
 }

@@ -2,6 +2,7 @@ package it.epicode.gruppo1.app.config;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class Beans {
 
 	@Bean
 	@Scope("prototype")
-	public Cliente cliente(String ragioneSociale, long partitaIva, String email, LocalDate dataIserimento, LocalDate dataUltimoContatto, double fatturatoAnnuale, String pec, long telefono, String emailContatto, String nomeContatto, String cognomeContatto, long telefonoContatto, TipoCliente tipoCliente, List<Indirizzo> indirizzi, List<Fattura> fatture) {
+	public Cliente cliente(String ragioneSociale, long partitaIva, String email, LocalDate dataIserimento, LocalDate dataUltimoContatto, double fatturatoAnnuale, String pec, long telefono, String emailContatto, String nomeContatto, String cognomeContatto, long telefonoContatto, TipoCliente tipoCliente, Indirizzo sedeLegale, Indirizzo sedeOperativa, List<Fattura> fatture) {
 		return Cliente.builder()
 				.ragioneSociale(ragioneSociale)
 				.partitaIva(partitaIva)
@@ -41,7 +42,8 @@ public class Beans {
 				.cognomeContatto(cognomeContatto)
 				.telefonoContatto(telefonoContatto)
 				.tipoCliente(tipoCliente)
-				.indirizzi(indirizzi)
+				.sedeLegale(sedeLegale)
+				.sedeOperativa(sedeOperativa)
 				.fatture(fatture)
 				.build();
 	}
