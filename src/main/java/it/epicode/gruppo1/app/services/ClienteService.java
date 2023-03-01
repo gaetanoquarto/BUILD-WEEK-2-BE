@@ -26,7 +26,7 @@ public class ClienteService {
 		return cr.findAll();
 	}
 	
-	public Page<Cliente> getAllInPages(Pageable pageable) {
+	public Page<Cliente> getAll_page(Pageable pageable) {
 		return cr.findAll(pageable);
 	}
 	

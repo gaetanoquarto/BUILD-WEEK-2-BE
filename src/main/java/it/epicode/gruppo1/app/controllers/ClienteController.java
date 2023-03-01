@@ -50,7 +50,7 @@ public class ClienteController {
 	
 	@GetMapping("clienti_page")
 	public ResponseEntity<Object> getClientiInPages(Pageable pageable) {
-		Page<Cliente> clienti = cs.getAllInPages(pageable);
+		Page<Cliente> clienti = cs.getAll_page(pageable);
 		
 		if(clienti.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,9 +62,9 @@ public class ClienteController {
 	@PostMapping("clienti")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> createCliente(@RequestBody Cliente c) {
-		Cliente clienti = cs.save(c);
+		Cliente cliente = cs.save(c);
 		
-		return new ResponseEntity<Object>(clienti, HttpStatus.CREATED);
+		return new ResponseEntity<Object>(cliente, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("clienti/{id}")
@@ -101,7 +101,7 @@ public class ClienteController {
 	
 	@DeleteMapping("clienti/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> delete(@PathVariable int id) {
+	public ResponseEntity<Object> deleteCliente(@PathVariable int id) {
 		Optional<Cliente> clienteObj = cs.getById(id);
 		
 		ResponseEntity<Object> check = checkExists(clienteObj);
