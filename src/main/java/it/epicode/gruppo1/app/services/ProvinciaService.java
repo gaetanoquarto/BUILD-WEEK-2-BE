@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.epicode.gruppo1.app.csv.CsvHelperProvincia;
 import it.epicode.gruppo1.app.entities.Provincia;
 import it.epicode.gruppo1.app.repositories.ProvinciaRepo;
 
@@ -28,6 +27,10 @@ public class ProvinciaService {
 		return pr.findById(id);
 	}
 	
+	public List<Provincia> saveAll(List<Provincia> p) {
+		return pr.saveAll(p);
+	}
+	
 	public List<Provincia> getAll() {
 		return pr.findAll();
 	}
@@ -40,13 +43,13 @@ public class ProvinciaService {
 		pr.delete(p);
 	}
 	
-	public void saveFile(MultipartFile file) {
-	    try {
-	      List<Provincia> province = CsvHelperProvincia.csvToProvincia(file.getInputStream());
-	      pr.saveAll(province);
-	    } catch (IOException e) {
-	      throw new RuntimeException("fail to store csv data: " + e.getMessage());
-	    }
-	  }
+//	public void saveFile(MultipartFile file) {
+//	    try {
+//	      List<Provincia> province = CsvHelperProvincia.csvToProvincia(file.getInputStream());
+//	      pr.saveAll(province);
+//	    } catch (IOException e) {
+//	      throw new RuntimeException("fail to store csv data: " + e.getMessage());
+//	    }
+//	  }
 
 }
