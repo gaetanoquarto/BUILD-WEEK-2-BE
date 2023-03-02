@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,7 +58,7 @@ public class Cliente {
 	@OneToOne
 	private Indirizzo sedeOperativa;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Fattura> fatture;
 
 }
