@@ -79,7 +79,7 @@ class FatturaTest {
 		
 		Optional<Fattura> recuperaFattura = fs.getById(fattura.getId());
 		
-		assertTrue(recuperaFattura.isPresent());
+		assertTrue(recuperaFattura.isPresent()); 
 		
 		Fattura f1 = recuperaFattura.get();
 		
