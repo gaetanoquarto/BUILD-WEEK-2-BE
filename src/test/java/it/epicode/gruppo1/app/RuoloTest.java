@@ -2,7 +2,6 @@ package it.epicode.gruppo1.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,11 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import it.epicode.gruppo1.app.entities.Cliente;
 import it.epicode.gruppo1.app.entities.Ruolo;
-import it.epicode.gruppo1.app.entities.enums.TipoCliente;
 import it.epicode.gruppo1.app.entities.enums.TipoRuolo;
-import it.epicode.gruppo1.app.services.ClienteService;
 import it.epicode.gruppo1.app.services.RuoloService;
 
 @SpringBootTest
