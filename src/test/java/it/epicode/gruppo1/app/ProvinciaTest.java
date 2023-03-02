@@ -61,7 +61,7 @@ class ProvinciaTest {
 		List<Provincia> province = ps.getAll();
 
 		// inserire il numero di elementi presenti nel database.
-		assertEquals(10, province.size());
+		assertEquals(110, province.size());
 
 	}
 
@@ -98,9 +98,10 @@ class ProvinciaTest {
 
 		ps.save(provincia);
 		
-		List<Provincia> p = ps.findByNome("test5");
+		List<Provincia> p = ps.findByNome("test");
 		
-		assertEquals("test5", p.get(0).getProvincia());
+		//inserire l'index del nuovo oggetto creato
+		assertEquals("test", p.get(110).getProvincia());
 		
 		ps.delete(provincia);
 
