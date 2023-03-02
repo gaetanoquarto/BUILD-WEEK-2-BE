@@ -26,13 +26,13 @@ import it.epicode.gruppo1.app.services.FatturaService;
 
 @RestController
 @RequestMapping("/")
-public class FattureController {
+public class FatturaController {
 
 	@Autowired
 	private FatturaService fs;
 	
 	@GetMapping("fatture")
-	public ResponseEntity<List<Fattura>> getClienti() {
+	public ResponseEntity<List<Fattura>> getFatture() {
 		List<Fattura> fatture = fs.getAll();
 		
 		return new ResponseEntity<>(fatture, HttpStatus.CREATED);
@@ -50,7 +50,7 @@ public class FattureController {
 	
 	@GetMapping("fatture_page")
 	public ResponseEntity<Object> getFattureInPages(Pageable pageable) {
-		Page<Fattura> fatture = fs.getAllInPages(pageable);
+		Page<Fattura> fatture = fs.getAll_page(pageable);
 		
 		if(fatture.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -61,15 +61,15 @@ public class FattureController {
 	
 	@PostMapping("fatture")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> createCliente(@RequestBody Fattura f) {
-		Fattura fatture = fs.save(f);
+	public ResponseEntity<Object> createFattura(@RequestBody Fattura f) {
+		Fattura fattura = fs.save(f);
 		
-		return new ResponseEntity<Object>(fatture, HttpStatus.CREATED);
+		return new ResponseEntity<Object>(fattura, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("fatture/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> updateCliente(@PathVariable int id, @RequestBody Fattura _fattura) {
+	public ResponseEntity<Object> updateFattura(@PathVariable int id, @RequestBody Fattura _fattura) {
 		Optional<Fattura> fatturaObj = fs.getById(id);
 		
 		ResponseEntity<Object> check = checkExists(fatturaObj);
@@ -90,7 +90,7 @@ public class FattureController {
 	
 	@DeleteMapping("fatture/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Object> delete(@PathVariable int id) {
+	public ResponseEntity<Object> deleteFattura(@PathVariable int id) {
 		Optional<Fattura> fatturaObj = fs.getById(id);
 		
 		ResponseEntity<Object> check = checkExists(fatturaObj);

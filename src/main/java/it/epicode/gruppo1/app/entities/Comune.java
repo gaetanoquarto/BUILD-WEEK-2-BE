@@ -38,8 +38,6 @@ public class Comune {
 	@Column(name = "porgressivo_comune")
 	private String progComune;
 	
-	
-	
 	@ManyToOne
 	private Provincia provincia;
 

@@ -45,12 +45,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(this.passwordEncoder());
 	}
+	
+	// inserire eventualmente queste path in antMatchers per evitare di fare il login
+	// "/utenti", "/utenti_page", "/utenti/**", "/comuni", "/comuni_page", "/comuni/**", "/province", "/province/**", "/province_page", "/indirizzi", "/indirizzi_page", "/indirizzi/**", "/fatture", "/fatture_page", "/fatture/**", "/clienti", "/clienti_page", "/clienti/**"
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/auth/login", "/auth/update_user_pw", "/province", "/comuni", "/home", "/clienti_page", "/fatture/**", "/clienti/**").permitAll()
+				.antMatchers("/auth/login", "/home").permitAll()
 				.antMatchers("/**").authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
