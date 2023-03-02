@@ -16,6 +16,11 @@ import it.epicode.gruppo1.app.services.ClienteService;
 
 @SpringBootTest
 class ClienteTest {
+	
+		
+		@Autowired
+		private ClienteService cs;
+
 
 	@Autowired
 	private ClienteService cs;
@@ -61,6 +66,7 @@ class ClienteTest {
 
 	}
 
+
 	@Test
 	void testDeleteCliente() {
 		Cliente cliente = new Cliente();
@@ -78,6 +84,7 @@ class ClienteTest {
 		cliente.setTelefonoContatto(7544845655L);
 		cliente.setTipoCliente(TipoCliente.SAS);
 
+
 		cs.save(cliente);
 
 		cs.delete(cliente);
@@ -88,17 +95,32 @@ class ClienteTest {
 
 	}
 
+
+		cs.save(cliente);
+
+		cs.delete(cliente);
+		
+		Optional<Cliente> clienteEliminato = cs.getById(cliente.getId());
+		
+		assertTrue(clienteEliminato.isEmpty());
+		
+	}
+	
 	@Test
 	void testGetAll() {
+
 
 		List<Cliente> clienti = cs.getAll();
 
 		// inserire il numero di elementi presenti nel database.
+
 		assertEquals(4, clienti.size());
 	}
-
+	
 	@Test
 	void testUpdate() {
+
+
 
 		Cliente cliente = new Cliente();
 		cliente.setRagioneSociale("test");
@@ -114,6 +136,7 @@ class ClienteTest {
 		cliente.setCognomeContatto("Rossi");
 		cliente.setTelefonoContatto(7544845655L);
 		cliente.setTipoCliente(TipoCliente.SAS);
+
 
 		cs.save(cliente);
 
@@ -131,7 +154,26 @@ class ClienteTest {
 
 		cs.delete(cliente);
 
+
 	}
+	
+	@Test
+	void testCercaPerNome() {
+		Cliente cliente = new Cliente();
+		cliente.setRagioneSociale("test");
+		cliente.setPartitaIva(123456789L);
+		cliente.setEmail("cliente1@mail.com");
+		cliente.setDataInserimento(LocalDate.now());
+		cliente.setDataUltimoContatto(LocalDate.now());
+		cliente.setFatturatoAnnuale(400000.00);
+		cliente.setPec("cliente1@pec.it");
+		cliente.setTelefono(3452392816L);
+		cliente.setEmailContatto("cc1@mail.com");
+		cliente.setNomeContatto("test1");
+		cliente.setCognomeContatto("Rossi");
+		cliente.setTelefonoContatto(7544845655L);
+		cliente.setTipoCliente(TipoCliente.SAS);
+
 
 	@Test
 	void testCercaPerNome() {
@@ -155,6 +197,7 @@ class ClienteTest {
 		List<Cliente> c = cs.findByNome("test1");
 
 		assertEquals("test1", c.get(0).getNomeContatto());
+
 
 		cs.delete(cliente);
 	}

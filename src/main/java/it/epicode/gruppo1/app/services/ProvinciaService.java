@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.epicode.gruppo1.app.entities.Cliente;
 import it.epicode.gruppo1.app.entities.Provincia;
 import it.epicode.gruppo1.app.repositories.ProvinciaRepo;
 
@@ -41,6 +42,10 @@ public class ProvinciaService {
 	
 	public void delete(Provincia p) {
 		pr.delete(p);
+	}
+	
+	public List<Provincia> findByNome(String provincia) {
+		return pr.findByNome(provincia);
 	}
 	
 //	public void saveFile(MultipartFile file) {
