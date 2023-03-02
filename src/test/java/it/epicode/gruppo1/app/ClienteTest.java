@@ -16,11 +16,6 @@ import it.epicode.gruppo1.app.services.ClienteService;
 
 @SpringBootTest
 class ClienteTest {
-	
-		
-		@Autowired
-		private ClienteService cs;
-
 
 	@Autowired
 	private ClienteService cs;
@@ -94,17 +89,8 @@ class ClienteTest {
 		assertTrue(clienteEliminato.isEmpty());
 
 	}
-
-
-		cs.save(cliente);
-
-		cs.delete(cliente);
 		
-		Optional<Cliente> clienteEliminato = cs.getById(cliente.getId());
-		
-		assertTrue(clienteEliminato.isEmpty());
-		
-	}
+
 	
 	@Test
 	void testGetAll() {
@@ -157,22 +143,6 @@ class ClienteTest {
 
 	}
 	
-	@Test
-	void testCercaPerNome() {
-		Cliente cliente = new Cliente();
-		cliente.setRagioneSociale("test");
-		cliente.setPartitaIva(123456789L);
-		cliente.setEmail("cliente1@mail.com");
-		cliente.setDataInserimento(LocalDate.now());
-		cliente.setDataUltimoContatto(LocalDate.now());
-		cliente.setFatturatoAnnuale(400000.00);
-		cliente.setPec("cliente1@pec.it");
-		cliente.setTelefono(3452392816L);
-		cliente.setEmailContatto("cc1@mail.com");
-		cliente.setNomeContatto("test1");
-		cliente.setCognomeContatto("Rossi");
-		cliente.setTelefonoContatto(7544845655L);
-		cliente.setTipoCliente(TipoCliente.SAS);
 
 
 	@Test
