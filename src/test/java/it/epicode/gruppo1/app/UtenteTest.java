@@ -66,7 +66,7 @@ class UtenteTest {
 		List<Utente> utenti = us.getAll();
 		
 		//inserire il numero di elementi presenti nel database.
-		assertEquals(2, utenti.size());
+		assertEquals(3, utenti.size());
 	}
 	
 	@Test
