@@ -100,7 +100,7 @@ class ClienteTest {
 
 		// inserire il numero di elementi presenti nel database.
 
-		assertEquals(4, clienti.size());
+		assertEquals(2, clienti.size());
 	}
 	
 	@Test
