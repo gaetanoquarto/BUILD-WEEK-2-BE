@@ -1,5 +1,6 @@
 package it.epicode.gruppo1.app.controllers;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.epicode.gruppo1.app.entities.Cliente;
+import it.epicode.gruppo1.app.entities.Ruolo;
 import it.epicode.gruppo1.app.entities.Utente;
+import it.epicode.gruppo1.app.entities.enums.TipoRuolo;
+import it.epicode.gruppo1.app.services.RuoloService;
 import it.epicode.gruppo1.app.services.UtenteService;
 
 @RestController
@@ -76,10 +80,32 @@ public class UtenteController {
 		return "utente aggiornato";
 	}
 	
+	@Autowired
+	RuoloService rs;
+	
 	@PostMapping("utenti")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Object> createUtente(@RequestBody Utente u) {
 		String password = u.getPassword();
+		Optional<Ruolo> userOp = rs.getById(2);
+		Ruolo user = userOp.get();
+		u.setRuoli(new HashSet<>() {{
+			add(user);
+		}});
+		u.setPassword(pwEncoder.encode(password));
+		Utente utente = us.save(u);
+		
+		return new ResponseEntity<Object>(utente, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("registrazione")
+	public ResponseEntity<Object> registrati(@RequestBody Utente u) {
+		String password = u.getPassword();
+		Optional<Ruolo> userOp = rs.getById(2);
+		Ruolo user = userOp.get();
+		u.setRuoli(new HashSet<>() {{
+			add(user);
+		}});
 		u.setPassword(pwEncoder.encode(password));
 		Utente utente = us.save(u);
 		
